@@ -49,7 +49,7 @@ graph TD
 
 
 # Requirements
-- [Python 3.10.2](https://www.python.org/ "Python latest version")
+- [Python](https://www.python.org/ "Python latest version")
 
 # Installation
 1. After installing python, download the current version of this repository, you can do it with the following command or download the zip archive and extract it:
