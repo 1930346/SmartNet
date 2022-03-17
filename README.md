@@ -53,7 +53,9 @@ graph TD
 
 # Installation
 1. After installing python, download the current version of this repository, you can do it with the following command or download the zip archive and extract it:
-
+``` bash
+git clone https://github.com/1930346/SmartNet.git
+```
 2. Open a terminal and navigate to the SmartNet folder:
 ``` bash
 cd SmartNet
