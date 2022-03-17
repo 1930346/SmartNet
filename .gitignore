@@ -1,3 +1,6 @@
+#Python venv
+fastapi-mysql/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
