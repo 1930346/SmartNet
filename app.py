@@ -17,7 +17,42 @@ app = FastAPI(
     openapi_tags = [{
         "name": "users",
         "description": "Operations about users (user routes)"
-    }]
+    },
+    {
+        "name": "cart_items",
+        "description": "Operations about cart_items (cart_item routes)"
+    },
+    {
+        "name": "order_details",
+        "description": "Operations about order_details (order_detail routes)"
+    },
+    {
+        "name": "order_items",
+        "description": "Operations about order_items (order_item routes)"
+    },
+    {
+        "name": "payment_details",
+        "description": "Operations about payment_details (payment_detail routes)"
+    },
+    {
+        "name": "product_categories",
+        "description": "Operations about product_categories (product_category routes)"
+    },
+    {
+        "name": "products",
+        "description": "Operations about products (product routes)"
+    },
+    {
+        "name": "rols",
+        "description": "Operations about rols (rol routes)"
+    },
+    {
+        "name": "shopping_sessions",
+        "description": "Operations about shopping_sessions (shopping_session routes)"
+    }
+    
+    
+    ]
 ) 
 
 app.include_router(user) #Mi app incluya las rutas que vienen de user

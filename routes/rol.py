@@ -14,7 +14,39 @@ from starlette.status import HTTP_204_NO_CONTENT
 
 rol = APIRouter()
 
-
+#Obtiene todos los roles
 @rol.get("/rols", response_model=list[Rol], tags=["rols"])
 def get_rols():
     return conn.execute(rols.select()).fetchall()
+
+#Obtiene un rol por id
+@rol.get("/rols/{id}", response_model=Rol, tags=["rols"])
+def get_rol(id: str):
+    return conn.execute(rols.select().where(rols.c.id == id)).first()
+
+
+#Creación de un rol
+@rol.post("/rols", response_model=Rol, tags=["rols"])
+def create_rol(rol: Rol):
+    new_rol = {
+        "name": rol.name,
+        "description": rol.description
+    }
+    result = conn.execute(rols.insert().values(new_rol))
+    return conn.execute(rols.select().where(rols.c.id == result.lastrowid)).first()
+
+#Eliminación de un rol
+@rol.delete("/rols/{id}", status_code = status.HTTP_204_NO_CONTENT, tags = ["rols"])
+def delete_rol(id: str):
+    conn.execute(rols.delete().where(rols.c.id == id))
+    return Response(status_code = HTTP_204_NO_CONTENT)
+
+#Actualización de un rol
+@rol.put("/rols/{id}", response_model=Rol, tags = ["rols"])
+def update_rol(id: str, rol: Rol):
+    conn.execute(rols.update().values(
+        name = rol.name,
+        description = rol.description
+    ).where(rols.c.id == id))
+    return conn.execute(rols.select().where(rols.c.id == id)).first()
+    

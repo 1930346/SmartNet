@@ -13,7 +13,7 @@ products = Table("products", meta,
     Column("category_id", Integer),
     # Column("category_id", Integer, ForeignKey("product_categories.id")),
     Column("price", Float, default=0.00),
-    Column("status", String(255), server_default="active"),
+    Column("status", String(255), server_default="active", default="active"),
     Column("created_at", DateTime, server_default = func.sysdate()),
     Column("modified_at", DateTime, server_default = func.sysdate())
 )

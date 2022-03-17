@@ -13,3 +13,38 @@ from cryptography.fernet import Fernet
 from starlette.status import HTTP_204_NO_CONTENT
 
 shopping_session = APIRouter()
+
+#Obtiene todos los shopping_sessions
+@shopping_session.get("/shopping_sessions", response_model=list[Shopping_session], tags=["shopping_sessions"])
+def get_shopping_sessions():
+    return conn.execute(shopping_sessions.select()).fetchall()
+
+#Obtiene un shopping_session por id
+@shopping_session.get("/shopping_sessions/{id}", response_model=Shopping_session, tags=["shopping_sessions"])
+def get_shopping_session(id: str):
+    return conn.execute(shopping_sessions.select().where(shopping_sessions.c.id == id)).first()
+
+#Creación de un shopping_session
+@shopping_session.post("/shopping_sessions", response_model=Shopping_session, tags=["shopping_sessions"])
+def create_shopping_session(shopping_session: Shopping_session):
+    new_shopping_session = {
+        "user_id": shopping_session.user_id,
+        "total": shopping_session.total,
+    }
+    result = conn.execute(shopping_sessions.insert().values(new_shopping_session))
+    return conn.execute(shopping_sessions.select().where(shopping_sessions.c.id == result.lastrowid)).first()
+
+#Eliminación de un shopping_session
+@shopping_session.delete("/shopping_sessions/{id}", status_code = status.HTTP_204_NO_CONTENT, tags = ["shopping_sessions"])
+def delete_shopping_session(id: str):
+    conn.execute(shopping_sessions.delete().where(shopping_sessions.c.id == id))
+    return Response(status_code = HTTP_204_NO_CONTENT)
+
+#Actualización de un shopping_session
+@shopping_session.put("/shopping_sessions/{id}", response_model = Shopping_session, tags = ["shopping_sessions"])
+def update_shopping_session(id: str, shopping_session: Shopping_session):
+    conn.execute(shopping_sessions.update().values(
+        user_id = shopping_session.user_id,
+        total = shopping_session.total,
+    ).where(shopping_sessions.c.id == id))
+    return conn.execute(shopping_sessions.select().where(shopping_sessions.c.id == id)).first()

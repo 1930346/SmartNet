@@ -13,3 +13,45 @@ from cryptography.fernet import Fernet
 from starlette.status import HTTP_204_NO_CONTENT
 
 order_detail = APIRouter()
+
+
+#Obtiene todos los order_details
+@order_detail.get("/order_details", response_model=list[Order_detail], tags=["order_details"])
+def get_order_details():
+    return conn.execute(order_details.select()).fetchall()
+
+#Obtiene un order_detail por id
+@order_detail.get("/order_details/{id}", response_model=Order_detail, tags=["order_details"])
+def get_order_detail(id: str):
+    return conn.execute(order_details.select().where(order_details.c.id == id)).first()
+
+
+#Creación de un order_detail
+@order_detail.post("/order_details", response_model=Order_detail, tags=["order_details"])
+def create_order_detail(order_detail: Order_detail):
+    new_order_detail = {
+        "user_id": order_detail.user_id,
+        "payment_id": order_detail.payment_id,
+        "total": order_detail.total,
+        #"created_at": order_detail.created_at,
+    }
+    result = conn.execute(order_details.insert().values(new_order_detail))
+    return conn.execute(order_details.select().where(order_details.c.id == result.lastrowid)).first()
+
+
+#Eliminación de un order_detail
+@order_detail.delete("/order_details/{id}", status_code = status.HTTP_204_NO_CONTENT, tags = ["order_details"])
+def delete_order_detail(id: str):
+    conn.execute(order_details.delete().where(order_details.c.id == id))
+    return Response(status_code = HTTP_204_NO_CONTENT)
+
+#Actualización de un order_detail
+@order_detail.put("/order_details/{id}", response_model=Order_detail, tags = ["order_details"])
+def update_order_detail(id: str, order_detail: Order_detail):
+    conn.execute(order_details.update().values(
+        user_id = order_detail.user_id,
+        payment_id = order_detail.payment_id,
+        total = order_detail.total,
+        #created_at = order_detail.created_at,
+    ).where(order_details.c.id == id))
+    return conn.execute(order_details.select().where(order_details.c.id == id)).first()
