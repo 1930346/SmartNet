@@ -42,12 +42,7 @@ graph TD
     style opye fill:yellow
     style medn fill:blue
     style uc_n fill:cyan
-
-
-
 ```
-
-
 # Requirements
 - [Python](https://www.python.org/ "Python latest version")
 
