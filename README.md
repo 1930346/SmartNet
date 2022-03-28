@@ -74,12 +74,12 @@ source venv/fastapi-mysql/bin/activate
 4. Run the following commands to install FastAPI as a package and install all the dependencies and update pip:
 ``` bash
 pip install --upgrade pip
-pip install fastapi uvicorn sqlalchemy pymysql cryptography
+pip install fastapi uvicorn sqlalchemy pymysql cryptography databases aiomysql
 ```
 If you are using windows:
 ``` bash
 python -m pip install --upgrade pip
-pip install fastapi uvicorn sqlalchemy pymysql cryptography
+pip install fastapi uvicorn sqlalchemy pymysql cryptography databases aiomysql
 
 ```
    
