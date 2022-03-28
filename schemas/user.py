@@ -16,7 +16,7 @@ class User(BaseModel):
     address: str
     telephone: str
     email: str
-    rol_id: str
+    rol_id: str | None = 1
     username: str
     password: str
 

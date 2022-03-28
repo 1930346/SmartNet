@@ -8,12 +8,13 @@ from routes.product_category import product_category
 from routes.product import product
 from routes.rol import rol
 from routes.shopping_session import shopping_session
+from config.db import engine, meta
 
-
+meta.create_all(engine)
 
 app = FastAPI(
     title="Prueba API",
-    description="Este es un ejemplo de una API con FastAPI",
+    description="API for SmartNet Store",
     openapi_tags = [{
         "name": "users",
         "description": "Operations about users (user routes)"

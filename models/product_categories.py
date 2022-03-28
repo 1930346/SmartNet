@@ -13,4 +13,4 @@ product_categories = Table("product_categories", meta,
     Column("modified_at", DateTime, server_default = func.sysdate())
 )   
 
-meta.create_all(engine)
+# meta.create_all(engine)

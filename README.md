@@ -42,12 +42,7 @@ graph TD
     style opye fill:yellow
     style medn fill:blue
     style uc_n fill:cyan
-
-
-
 ```
-
-
 # Requirements
 - [Python](https://www.python.org/ "Python latest version")
 
@@ -79,10 +74,12 @@ source venv/fastapi-mysql/bin/activate
 4. Run the following commands to install FastAPI as a package and install all the dependencies and update pip:
 ``` bash
 pip install --upgrade pip
+pip install fastapi uvicorn sqlalchemy pymysql cryptography databases aiomysql
 ```
 If you are using windows:
 ``` bash
 python -m pip install --upgrade pip
+pip install fastapi uvicorn sqlalchemy pymysql cryptography
 
 ```
    

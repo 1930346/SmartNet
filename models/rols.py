@@ -11,4 +11,4 @@ rols = Table("rols", meta,
     Column("description", String(255))
 )
 
-meta.create_all(engine)
+# meta.create_all(engine)
