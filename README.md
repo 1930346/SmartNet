@@ -79,7 +79,7 @@ pip install fastapi uvicorn sqlalchemy pymysql cryptography databases aiomysql
 If you are using windows:
 ``` bash
 python -m pip install --upgrade pip
-pip install fastapi uvicorn sqlalchemy pymysql cryptography
+pip install fastapi uvicorn sqlalchemy pymysql cryptography databases aiomysql
 
 ```
    
