@@ -2,21 +2,39 @@
 #Mandera de crear tipos de datos
 from pydantic import BaseModel
 
-#De esta forma ya tenemos definidos los datos para unb usuario
+
+
+#Creamos esta clase para los atributos en común de ambos Schemas
 class User(BaseModel):
-    #Esto se hace para no importal optional, ya que hace el atributo opcional
+    first_name: str
+    last_name: str
+    address: str
+    # telephone: str
+    # email: str 
+    username: str
+
+
+class User_two(User):
+    rol_id: str | None = 1
+    telephone: str
+    email: str 
+
+#De esta forma ya tenemos definidos los datos para unb usuario
+class User_in(User_two):
+    password: str
+
+class User_outs(User_two):
+    id: str
+    # password: str
+    # created_at: str
+
+class User_update(User):
     # id: str | None = None
     # name: str
     # email: str
     # password: str
+    # id: str | None = None
+    pass
 
-    id: str | None = None
-    first_name: str
-    last_name: str
-    address: str
-    telephone: str
-    email: str
-    rol_id: str | None = 1
-    username: str
-    password: str
+
 

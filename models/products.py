@@ -12,9 +12,9 @@ products = Table("products", meta,
     Column("image", String(255)),
     Column("category_id", Integer, ForeignKey("product_categories.id")),
     Column("price", Float, default=0.00),
-    Column("status", String(255), server_default="active", default="active"),
-    Column("created_at", DateTime, server_default = func.sysdate()),
-    Column("modified_at", DateTime, server_default = func.sysdate())
+    Column("status", String(255), default="active"),
+    Column("created_at", DateTime, server_default = func.now()),
+    Column("modified_at", DateTime, server_default = func.now())
 )
 
 # meta.create_all(engine)

@@ -6,7 +6,7 @@ from config.db import conn
 #Aquí traemos el schema
 from models.product_categories import product_categories
 #Llamada al schema usuario para crear uno
-from schemas.product_category import Product_category
+from schemas.product_category import Product_category, Products_category_outs
 #Modulo para generar una función de cifrado
 from cryptography.fernet import Fernet
 #Ahora para scar los codigos HTTP
@@ -15,17 +15,17 @@ from starlette.status import HTTP_204_NO_CONTENT
 product_category = APIRouter()
 
 #Obtiene todos los product_categories
-@product_category.get("/product_categories", response_model=list[Product_category], tags=["product_categories"])
+@product_category.get("/product_categories", response_model=list[Products_category_outs], tags=["product_categories"])
 def get_product_categories():
     return conn.execute(product_categories.select()).fetchall()
 
 #Obtiene un product_category por id
-@product_category.get("/product_categories/{id}", response_model=Product_category, tags=["product_categories"])
+@product_category.get("/product_categories/{id}", response_model=Products_category_outs, tags=["products_categories"])
 def get_product_category(id: str):
     return conn.execute(product_categories.select().where(product_categories.c.id == id)).first()
 
 #Creación de un product_category
-@product_category.post("/product_categories", response_model=Product_category, tags=["product_categories"])
+@product_category.post("/product_categories", response_model=Products_category_outs, tags=["product_categories"])
 def create_product_category(product_category: Product_category):
     new_product_category = {
         "name": product_category.name,

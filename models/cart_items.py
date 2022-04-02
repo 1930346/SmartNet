@@ -12,8 +12,8 @@ cart_items = Table("cart_items", meta,
     # Column("product_id", Integer),
     Column("product_id", Integer, ForeignKey("products.id")),
     Column("quantity", Integer),
-    Column("created_at", DateTime, server_default = func.sysdate()),
-    Column("modified_at", DateTime, server_default = func.sysdate())
+    Column("created_at", DateTime, server_default = func.now()),
+    Column("modified_at", DateTime, server_default = func.now())
 )
 
 # meta.create_all(engine)

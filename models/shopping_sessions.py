@@ -8,11 +8,11 @@ shopping_sessions = Table("shopping_sessions", meta,
     # Column("user_id", Integer),
     Column("user_id", Integer, ForeignKey("users.id")),
     Column("total", Float, default=0.00),
-    Column("created_at", DateTime, server_default = func.sysdate()),
-    Column("modified_at", DateTime, server_default = func.sysdate())
+    Column("created_at", DateTime, server_default = func.now()),
+    Column("modified_at", DateTime, server_default = func.now())
 )
 
 # meta.create_all(engine)
 
 #Por copilot
-# Column("modified_at", DateTime, server_default = func.sysdate(), onupdate = func.sysdate())
+# Column("modified_at", DateTime, server_default = func.now(), onupdate = func.now())

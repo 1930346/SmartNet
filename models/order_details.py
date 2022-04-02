@@ -11,7 +11,7 @@ order_details = Table("order_details", meta,
     # Column("payment_id", Integer),
     Column("payment_id", Integer, ForeignKey("payment_details.id")),
     Column("total", Float, default=0.00),
-    Column("created_at", DateTime, server_default = func.sysdate())
+    Column("created_at", DateTime, server_default = func.now())
 )
 
 # meta.create_all(engine)

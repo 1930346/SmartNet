@@ -1,9 +1,10 @@
 from pydantic import BaseModel
-
+from datetime import datetime
+from sqlalchemy.sql import func
 
 class Shopping_session(BaseModel):
-    id: str | None = None
+    # id: str | None = None
     user_id: str
     total: float
-    created_at: str | None = None
-    modified_at: str | None = None
+    created_at: datetime | None = None
+    modified_at: datetime | None = None
