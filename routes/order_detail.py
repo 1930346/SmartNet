@@ -6,7 +6,7 @@ from config.db import conn
 #Aquí traemos el schema
 from models.order_details import order_details
 #Llamada al schema usuario para crear uno
-from schemas.order_detail import Order_detail
+from schemas.order_detail import Order_detail, Order_detail_in, Order_detail_out, Order_detail_outs, Order_detail_update
 #Modulo para generar una función de cifrado
 from cryptography.fernet import Fernet
 #Ahora para scar los codigos HTTP
@@ -16,19 +16,19 @@ order_detail = APIRouter()
 
 
 #Obtiene todos los order_details
-@order_detail.get("/order_details", response_model=list[Order_detail], tags=["order_details"])
+@order_detail.get("/order_details", response_model=list[Order_detail_outs], tags=["order_details"])
 def get_order_details():
     return conn.execute(order_details.select()).fetchall()
 
 #Obtiene un order_detail por id
-@order_detail.get("/order_details/{id}", response_model=Order_detail, tags=["order_details"])
+@order_detail.get("/order_details/{id}", response_model=Order_detail_outs, tags=["order_details"])
 def get_order_detail(id: str):
     return conn.execute(order_details.select().where(order_details.c.id == id)).first()
 
 
 #Creación de un order_detail
-@order_detail.post("/order_details", response_model=Order_detail, tags=["order_details"])
-def create_order_detail(order_detail: Order_detail):
+@order_detail.post("/order_details", response_model=Order_detail_outs, tags=["order_details"])
+def create_order_detail(order_detail: Order_detail_in):
     new_order_detail = {
         "user_id": order_detail.user_id,
         "payment_id": order_detail.payment_id,
@@ -46,8 +46,8 @@ def delete_order_detail(id: str):
     return Response(status_code = HTTP_204_NO_CONTENT)
 
 #Actualización de un order_detail
-@order_detail.put("/order_details/{id}", response_model=Order_detail, tags = ["order_details"])
-def update_order_detail(id: str, order_detail: Order_detail):
+@order_detail.put("/order_details/{id}", response_model=Order_detail_outs, tags = ["order_details"])
+def update_order_detail(id: str, order_detail: Order_detail_update):
     conn.execute(order_details.update().values(
         user_id = order_detail.user_id,
         payment_id = order_detail.payment_id,

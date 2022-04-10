@@ -45,7 +45,7 @@ def create_user(user: User_in):
     new_user = {
         "first_name": user.first_name,
         "last_name": user.last_name,
-        "address": user.address,
+        # "address": user.address,
         "telephone": user.telephone,
         "email": user.email,
         "rol_id": user.rol_id,
@@ -92,7 +92,7 @@ def update_user(id: str, user: User_update):
     conn.execute(users.update().values(
         first_name=user.first_name,
         last_name=user.last_name,
-        address=user.address,
+        # address=user.address,
         # telephone=user.telephone,
         # email=user.email,
         username=user.username).where(users.c.id == id))

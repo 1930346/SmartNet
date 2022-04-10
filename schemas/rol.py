@@ -11,4 +11,5 @@ class Rol_outs(Rol):
 class Rol_in(Rol):
     pass
 
-    
+class Rol_update(Rol):
+    pass

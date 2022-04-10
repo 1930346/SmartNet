@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from routes.user import user
+from routes.address import address
 from routes.cart_item import cart_item
 from routes.order_detail import order_detail
 from routes.order_item import order_item
@@ -57,6 +58,7 @@ app = FastAPI(
 ) 
 
 app.include_router(user) #Mi app incluya las rutas que vienen de user
+app.include_router(address)
 app.include_router(rol)
 app.include_router(product)
 app.include_router(product_category)

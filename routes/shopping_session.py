@@ -1,12 +1,13 @@
 #Archivo para rutas USER
 #Este modulo permite definir subrutas o rutas por separado, response es para respuestas HTTP
+import datetime
 from fastapi import APIRouter, Response, status
 #Esto solo me dice a donde conectarme, no hay un schema
 from config.db import conn
 #Aquí traemos el schema
 from models.shopping_sessions import shopping_sessions
 #Llamada al schema usuario para crear uno
-from schemas.shopping_session import Shopping_session
+from schemas.shopping_session import Shopping_session, Shopping_session_in, Shopping_session_out, Shopping_session_outs, Shopping_session_update
 #Modulo para generar una función de cifrado
 from cryptography.fernet import Fernet
 #Ahora para scar los codigos HTTP
@@ -15,18 +16,18 @@ from starlette.status import HTTP_204_NO_CONTENT
 shopping_session = APIRouter()
 
 #Obtiene todos los shopping_sessions
-@shopping_session.get("/shopping_sessions", response_model=list[Shopping_session], tags=["shopping_sessions"])
+@shopping_session.get("/shopping_sessions", response_model=list[Shopping_session_outs], tags=["shopping_sessions"])
 def get_shopping_sessions():
     return conn.execute(shopping_sessions.select()).fetchall()
 
 #Obtiene un shopping_session por id
-@shopping_session.get("/shopping_sessions/{id}", response_model=Shopping_session, tags=["shopping_sessions"])
+@shopping_session.get("/shopping_sessions/{id}", response_model=Shopping_session_outs, tags=["shopping_sessions"])
 def get_shopping_session(id: str):
     return conn.execute(shopping_sessions.select().where(shopping_sessions.c.id == id)).first()
 
 #Creación de un shopping_session
-@shopping_session.post("/shopping_sessions", response_model=Shopping_session, tags=["shopping_sessions"])
-def create_shopping_session(shopping_session: Shopping_session):
+@shopping_session.post("/shopping_sessions", response_model=Shopping_session_outs, tags=["shopping_sessions"])
+def create_shopping_session(shopping_session: Shopping_session_in):
     new_shopping_session = {
         "user_id": shopping_session.user_id,
         "total": shopping_session.total,
@@ -41,10 +42,11 @@ def delete_shopping_session(id: str):
     return Response(status_code = HTTP_204_NO_CONTENT)
 
 #Actualización de un shopping_session
-@shopping_session.put("/shopping_sessions/{id}", response_model = Shopping_session, tags = ["shopping_sessions"])
-def update_shopping_session(id: str, shopping_session: Shopping_session):
+@shopping_session.put("/shopping_sessions/{id}", response_model = Shopping_session_outs, tags = ["shopping_sessions"])
+def update_shopping_session(id: str, shopping_session: Shopping_session_update):
     conn.execute(shopping_sessions.update().values(
         user_id = shopping_session.user_id,
         total = shopping_session.total,
+        modified_at = datetime.now()   ##Ask abour this
     ).where(shopping_sessions.c.id == id))
     return conn.execute(shopping_sessions.select().where(shopping_sessions.c.id == id)).first()

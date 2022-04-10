@@ -6,7 +6,7 @@ from config.db import conn
 #Aquí traemos el schema
 from models.rols import rols
 #Llamada al schema usuario para crear uno
-from schemas.rol import Rol, Rol_outs, Rol_in
+from schemas.rol import Rol, Rol_outs, Rol_in, Rol_update
 #Modulo para generar una función de cifrado
 from cryptography.fernet import Fernet
 #Ahora para scar los codigos HTTP
@@ -43,7 +43,7 @@ def delete_rol(id: str):
 
 #Actualización de un rol
 @rol.put("/rols/{id}", response_model=Rol_outs, tags = ["rols"])
-def update_rol(id: str, rol: Rol_in):
+def update_rol(id: str, rol: Rol_update):
     conn.execute(rols.update().values(
         name = rol.name,
         description = rol.description
