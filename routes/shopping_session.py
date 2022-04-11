@@ -7,7 +7,7 @@ from config.db import conn
 #Aquí traemos el schema
 from models.shopping_sessions import shopping_sessions
 #Llamada al schema usuario para crear uno
-from schemas.shopping_session import Shopping_session, Shopping_session_in, Shopping_session_out, Shopping_session_outs, Shopping_session_update
+from schemas.shopping_session import Shopping_session, Shopping_session_in, Shopping_session_outs, Shopping_session_outs, Shopping_session_update
 #Modulo para generar una función de cifrado
 from cryptography.fernet import Fernet
 #Ahora para scar los codigos HTTP

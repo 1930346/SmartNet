@@ -6,7 +6,7 @@ from config.db import conn
 #Aquí traemos el schema
 from models.order_details import order_details
 #Llamada al schema usuario para crear uno
-from schemas.order_detail import Order_detail, Order_detail_in, Order_detail_out, Order_detail_outs, Order_detail_update
+from schemas.order_detail import Order_detail, Order_detail_in, Order_detail_outs, Order_detail_outs, Order_detail_update
 #Modulo para generar una función de cifrado
 from cryptography.fernet import Fernet
 #Ahora para scar los codigos HTTP

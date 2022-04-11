@@ -11,11 +11,12 @@ products = Table("products", meta,
     Column("description", String(255)),
     Column("image", String(255)),
     Column("category_id", Integer, ForeignKey("product_categories.id")),
-    Column("price", Float, default=0.00),
-    Column("status", String(255), default="active"),
+    Column("price", Float(6,2), server_default = "0.00", default=0.00),
+    Column("status", String(255), server_default = "active", default="active"),
     Column("stock", Integer, default=0),
     Column("created_at", DateTime, server_default = func.now()),
     Column("modified_at", DateTime, server_default = func.now())
 )
 
+#default param is not working.
 # meta.create_all(engine)
