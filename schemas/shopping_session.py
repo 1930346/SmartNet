@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import datetime
 from sqlalchemy.sql import func
 
@@ -12,17 +12,17 @@ from sqlalchemy.sql import func
 
 
 class Shopping_session(BaseModel):
-    user_id: str
-    total: float
+    user_id: str = Field(title="The id of the user")
+    total: float = Field(title="The total of the order")
 
 class Shopping_session_in(Shopping_session):
     pass
 
 class Shopping_session_outs(Shopping_session):
-    id: str
-    created_at: datetime
-    modified_at: datetime
+    id: str = Field(title="The id of the shopping session")
+    created_at: datetime = Field(title="The date of creation of the shopping session")
+    modified_at: datetime = Field(title="The date of modification of the shopping session")
 
 class Shopping_session_update(Shopping_session):
-    modified_at: datetime
+    # modified_at: datetime
     pass

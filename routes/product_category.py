@@ -1,6 +1,7 @@
 #Archivo para rutas USER
 #Este modulo permite definir subrutas o rutas por separado, response es para respuestas HTTP
 import datetime
+from sqlalchemy.sql import func
 from fastapi import APIRouter, Response, status
 #Esto solo me dice a donde conectarme, no hay un schema
 from config.db import conn
@@ -21,7 +22,7 @@ def get_product_categories():
     return conn.execute(product_categories.select()).fetchall()
 
 #Obtiene un product_category por id
-@product_category.get("/product_categories/{id}", response_model=Product_category_outs, tags=["products_categories"])
+@product_category.get("/product_categories/{id}", response_model=Product_category_outs, tags=["product_categories"])
 def get_product_category(id: str):
     return conn.execute(product_categories.select().where(product_categories.c.id == id)).first()
 
@@ -48,6 +49,6 @@ def update_product_category(id: str, product_category: Product_category_update):
     conn.execute(product_categories.update().values(
         name=product_category.name,
         description=product_category.description,
-        modified_at= datetime.now()  #ask for this
+        modified_at= func.now()  #ask for this
     ).where(product_categories.c.id == id))
     return conn.execute(product_categories.select().where(product_categories.c.id == id)).first()

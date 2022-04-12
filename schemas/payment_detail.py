@@ -14,7 +14,7 @@ class Payment_detail(BaseModel):
 
 
 class Payment_detail_outs(Payment_detail):
-    id: str
+    id: str = Field(title="The id of the payment")
 
 class Payment_detail_in(Payment_detail):
     pass

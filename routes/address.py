@@ -1,6 +1,7 @@
 #Archivo para rutas USER
 #Este modulo permite definir subrutas o rutas por separado, response es para respuestas HTTP
 import datetime
+from sqlalchemy.sql import func
 from fastapi import APIRouter, Response, status
 #Esto solo me dice a donde conectarme, no hay un schema
 from config.db import conn
@@ -33,8 +34,8 @@ def create_address(address: Address_in):
     new_address = {
         "user_id": address.user_id,
         "street": address.street,
-        "int_num": address.int_num,
-        "ext_num": address.ext_num,
+        "int_number": address.int_number,
+        "ext_number": address.ext_number,
         "colony": address.colony,
         "city": address.city,
         "state": address.state,
@@ -54,12 +55,13 @@ def delete_address(id: str):
 def update_address(id: str, address: Address_update):
     conn.execute(addresses.update().values(
         street = address.street,
-        int_num = address.int_num,
-        ext_num = address.ext_num,
+        int_number = address.int_number,
+        ext_number = address.ext_number,
         colony = address.colony,
         city = address.city,
         state = address.state,
         zip_code = address.zip_code,
-        modified_at = datetime.now()  #ask about this
+        modified_at = func.now()
+        
     ).where(addresses.c.id == id))
     return conn.execute(addresses.select().where(addresses.c.id == id)).first()

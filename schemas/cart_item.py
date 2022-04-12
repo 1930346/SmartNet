@@ -24,5 +24,5 @@ class Cart_item_outs(Cart_item):
     modified_at: datetime = Field(title="The date of modification of the cart item")
 
 class Cart_item_update(Cart_item):
-    modified_at: datetime = Field(title="The date of modification of the cart item")
+    # modified_at: datetime = Field(title="The date of modification of the cart item")
     pass

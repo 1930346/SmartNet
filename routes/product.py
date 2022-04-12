@@ -1,6 +1,7 @@
 #Archivo para rutas USER
 #Este modulo permite definir subrutas o rutas por separado, response es para respuestas HTTP
 import datetime
+from sqlalchemy.sql import func
 from fastapi import APIRouter, Response, status
 #Esto solo me dice a donde conectarme, no hay un schema
 from config.db import conn
@@ -58,6 +59,6 @@ def update_product(id: str, product: Product_update):
         price=product.price,
         status=product.status,
         stock = product.stock,
-        modified_at = datetime.now() ##ask about this
+        modified_at = func.now() ##ask about this
     ).where(products.c.id == id))
     return conn.execute(products.select().where(products.c.id == id)).first()

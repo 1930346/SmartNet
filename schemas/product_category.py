@@ -25,5 +25,5 @@ class Product_category_in(Product_category):
     pass
 
 class Product_category_update(Product_category):
-    modified_at: datetime = Field(title="The date of modification of the product category")
+    # modified_at: datetime = Field(title="The date of modification of the product category")
     pass

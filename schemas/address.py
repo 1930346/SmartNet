@@ -18,8 +18,8 @@ from pydantic import BaseModel, Field
 
 class Address(BaseModel):
     street: str = Field(title="The street of the address", max_length=255)
-    int_num: str = Field(title="The int_num of the address", max_length= 6)
-    ext_num: str = Field(title="The ext_num of the address", max_length= 6)
+    int_number: str = Field(title="The int_num of the address", max_length= 6)
+    ext_number: str = Field(title="The ext_num of the address", max_length= 6)
     colony: str  = Field(title="The colony of the address", max_length=255)
     city: str = Field(title="The city of the address", max_length=255)
     state: str = Field(title="The state of the address", max_length=255)
@@ -37,5 +37,5 @@ class Address_outs(Address_two):
     modified_at: datetime = Field(title="The date of modification of the address")
 
 class Address_update(Address):
-    modified_at: datetime = Field(title="The date of modification of the address")
+    # modified_at: datetime = Field(title="The date of modification of the address")
     pass

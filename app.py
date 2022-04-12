@@ -51,9 +51,11 @@ app = FastAPI(
     {
         "name": "shopping_sessions",
         "description": "Operations about shopping_sessions (shopping_session routes)"
+    },
+    {
+        "name": "addresses",
+        "description": "Operations about addresses (address routes)"
     }
-    
-    
     ]
 ) 
 

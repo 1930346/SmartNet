@@ -34,5 +34,5 @@ class Product_outs(Product):
     modified_at: datetime = Field(title="The date of modification of the Product")
 
 class Product_update(Product):
-    modified_at: datetime = Field(title="The date of modification of the Product")
+    # modified_at: datetime = Field(title="The date of modification of the Product")
     pass
