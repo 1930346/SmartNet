@@ -2,7 +2,6 @@
 SmartNet Shop
 Smartnet is a store that addresses the sale of equipment for Networking, which includes product purchase, shopping cart and online support.
 
-
 # Data Flow Diagram
 Data inside SmartNet follow the next diagram
 
@@ -43,8 +42,21 @@ graph TD
     style medn fill:blue
     style uc_n fill:cyan
 ```
+
+# Database Structure
+![Database Structure](images/SmartNet_DB.png?usp=sharing)
+
+# Main Documments about the project
+- [User Manual](https://docs.google.com/document/d/1wE1DHkAu4ugy5N33-zZ9PHl6b_Hnhioj5LsaL3ywKuo/edit#heading=h.pmga95mf8jh2)
+- [Technical Manual](https://docs.google.com/document/d/157dtyjpNEqb3ve3SpynsqxhJk_geGqIQRruogzvvZX0/edit?usp=sharing)
+- [Data Dictionary](https://drive.google.com/file/d/1oAJAEBAfMfc9hIrT_wIkq7Z9ojCXjpAE/view)
+
+# Project Views With Vue.js 3 Repository
+- [SmartNet Linked](https://github.com/CarlosAvalos173/SmartnetLinked)
 # Requirements
-- [Python](https://www.python.org/ "Python latest version")
+- [Python 3.10.2](https://www.python.org/ "Python latest version")
+- [FastAPI 0.75.0](https://fastapi.tiangolo.com/ "FastAPI latest version")
+- [Vue.js 3 2.6.11](https://vuejs.org/ "Vue latest version")
 
 # Installation
 1. After installing python, download the current version of this repository, you can do it with the following command or download the zip archive and extract it:
@@ -72,18 +84,18 @@ If you are using a POSIX system (Linux, MACOS), you can use the following comman
 source venv/fastapi-mysql/bin/activate
 ```
 4. Run the following commands to install FastAPI as a package and install all the dependencies and update pip:
-``` bash
+``` pwsh
 pip install --upgrade pip
 pip install fastapi uvicorn sqlalchemy pymysql cryptography databases aiomysql
 ```
 If you are using windows:
-``` bash
+``` pwsh
 python -m pip install --upgrade pip
 pip install fastapi uvicorn sqlalchemy pymysql cryptography databases aiomysql
 
 ```
    
 5. Run the following command to run the SmartNet API:
-``` bash
+``` pwsh
 uvicorn app:app --reload
 ```
