@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field
 #     amount: float
 
 class Payment_detail(BaseModel):
-    order_id: str = Field(title="The id of the order")
+    # order_id: str = Field(title="The id of the order")
     provider: str = Field(title="The provider of the payment")
     amount: float = Field(title="The amount of the payment")
 

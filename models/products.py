@@ -4,6 +4,20 @@ from sqlalchemy.sql.sqltypes import Integer, String
 from sqlalchemy.sql import func
 
 
+"""
+    Define the model for the table of products in the database
+    Column: indicates info about the column like type, length, ForeignKey, and default values, etc.
+    Fields:
+        id: indicates the id of the product
+        name: indicates the name of the product
+        description: indicates the description of the product
+        image: indicates the image of the product
+        category_id: indicates the id of the category that the product belongs to
+        price: indicates the price of the product
+        stock: indicates the quantity of the product in stock
+        created_at: indicates the date when the product was created
+        modified_at: indicates the date when the product was modified
+"""
 #Creamos la tabla products
 products = Table("products", meta,
     Column("id", Integer, primary_key=True),

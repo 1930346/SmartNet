@@ -3,6 +3,15 @@ from config.db import meta, engine
 from sqlalchemy.sql.sqltypes import Integer, String
 from sqlalchemy.sql import func
 
+"""
+    Define the model for the table of order_items in the database
+    Column: indicates info about the column like type, length, ForeignKey, and default values, etc.
+    Fields:
+        id: indicates the id of the order_item
+        order_id: indicates the id of the order that owns the order_item
+        product_id: indicates the id of the product that is in the order_item
+        quantity: indicates the quantity of the product in the order_item
+"""
 
 #Creamos la tabla order_items
 order_items = Table("order_items", meta,

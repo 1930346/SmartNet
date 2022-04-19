@@ -29,7 +29,7 @@ def get_payment_detail(id: str):
 @payment_detail.post("/payment_details", response_model=Payment_detail_outs, tags=["payment_details"])
 def create_payment_detail(payment_detail: Payment_detail_in):
     new_payment_detail = {
-        "order_id": payment_detail.order_id,
+        # "order_id": payment_detail.order_id,
         "provider": payment_detail.provider,
         "amount": payment_detail.amount,
     }
@@ -46,7 +46,7 @@ def delete_payment_detail(id: str):
 @payment_detail.put("/payment_details/{id}", response_model = Payment_detail_outs, tags = ["payment_details"])
 def update_payment_detail(id: str, payment_detail: Payment_detail_update):
     conn.execute(payment_details.update().values(
-        order_id = payment_detail.order_id,
+        # order_id = payment_detail.order_id,
         provider = payment_detail.provider,
         amount = payment_detail.amount,
     ).where(payment_details.c.id == id))

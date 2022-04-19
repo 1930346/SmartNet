@@ -14,8 +14,10 @@ from config.db import engine, meta
 meta.create_all(engine)
 
 app = FastAPI(
-    title="Prueba API",
+    title="SmartNet API",
+    version = "1.0.0",
     description="API for SmartNet Store",
+    terms_of_service= "https://www.google.com/policies/terms/",
     openapi_tags = [{
         "name": "users",
         "description": "Operations about users (user routes)"
