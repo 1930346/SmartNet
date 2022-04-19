@@ -17,18 +17,30 @@ from starlette.status import HTTP_204_NO_CONTENT
 cart_item = APIRouter()
 
 
+"""
+    Endpoint para obtener todos los cart_items
+    @return: lista de cart_items
+"""
 #Obtenemos todos los cart_items
 @cart_item.get("/cart_items", response_model=list[Cart_item_outs], tags = ["cart_items"])
 def get_cart_items():
     return conn.execute(cart_item.select()).fetchall()
 
-
+"""
+    Endpoint para obtener un cart_item a través de un ID
+    @param: id_cart_item: id del cart_item
+    @return: un cart_item
+"""
 #Obtención de un cart_item por id
 @cart_item.get("/cart_items/{id}", response_model=Cart_item_outs, tags = ["cart_items"])
 def get_cart_item(id: str):
     return conn.execute(cart_item.select().where(cart_item.c.id == id)).first()
 
-
+"""
+    Endpoint para crear un cart_item
+    @param: cart_item: información del cart_item
+    @return: un cart_item
+"""
 #Creación de un cart_item
 @cart_item.post("/cart_items", response_model=Cart_item_outs, tags = ["cart_items"])
 def create_cart_item(cart_item: Cart_item_in):
@@ -42,13 +54,22 @@ def create_cart_item(cart_item: Cart_item_in):
     result = conn.execute(cart_item.insert().values(new_cart_item))
     return conn.execute(cart_item.select().where(cart_item.c.id == result.lastrowid)).first()
 
+"""
+    Endpoint para borrar un cart_item
+    @param: cart_item: información del cart_item
+    @return: HTTP 204 No Content
+"""
 #Eliminación de un cart_item
 @cart_item.delete("/cart_items/{id}", status_code = status.HTTP_204_NO_CONTENT, tags = ["cart_items"])
 def delete_cart_item(id: str):
     conn.execute(cart_item.delete().where(cart_item.c.id == id))
     return Response(status_code = HTTP_204_NO_CONTENT)
 
-
+"""
+    Endpoint para actualizar un cart_item
+    @param: cart_item: información del cart_item
+    @return: un cart_item
+"""
 #Actualización de un cart_item
 @cart_item.put("/cart_items/{id}", response_model=Cart_item_outs, tags = ["cart_items"])
 def update_cart_item(id: str, cart_item: Cart_item_update):

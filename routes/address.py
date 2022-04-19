@@ -18,16 +18,31 @@ from starlette.status import HTTP_204_NO_CONTENT
 address = APIRouter()
 
 
+"""
+    Endpoint para obtener todas las direcciones
+    @return: lista de direcciones
+
+"""
 #Obtiene todas las direcciones
 @address.get("/addresses", response_model=list[Address_outs], tags=["addresses"])
 def get_addresses():
     return conn.execute(addresses.select()).fetchall()
 
+"""
+    Endpoint para obtener una dirección a través de un ID
+    @param: id_user: id del usuario
+    @return: una dirección
+"""
 #Obtiene una dirección por id
 @address.get("/addresses/{id}", response_model=Address_outs, tags=["addresses"])
 def get_address(id: str):
     return conn.execute(addresses.select().where(addresses.c.id == id)).first()
 
+"""
+    Endpoint para crear una dirección
+    @param: address: información de la dirección
+    @return: una dirección
+"""
 #Crea una dirección
 @address.post("/addresses", response_model=Address_outs, tags=["addresses"])   
 def create_address(address: Address_in):
@@ -44,12 +59,23 @@ def create_address(address: Address_in):
     result = conn.execute(addresses.insert().values(new_address))
     return conn.execute(addresses.select().where(addresses.c.id == result.lastrowid)).first()
 
+"""
+    Endpoint para borrar una dirección según su id
+    @param: id: id de la dirección que se va a eliminar
+    @return: HTTP 204 No Content
+"""
 #Elimina una dirección
 @address.delete("/addresses/{id}", status_code = status.HTTP_204_NO_CONTENT, tags = ["addresses"])
 def delete_address(id: str):
     conn.execute(addresses.delete().where(addresses.c.id == id))
     return Response(status_code = HTTP_204_NO_CONTENT)
 
+"""
+    Endpoint para actualizar una dirección
+    @param: id: id de la dirección que se va a actualizar
+    @param: address: información de la dirección
+    @return: una dirección
+"""
 #Actualiza una dirección
 @address.put("/addresses/{id}", response_model=Address_outs, tags = ["addresses"])
 def update_address(id: str, address: Address_update):

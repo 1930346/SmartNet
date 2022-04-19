@@ -14,18 +14,29 @@ from starlette.status import HTTP_204_NO_CONTENT
 
 order_detail = APIRouter()
 
-
+"""
+    Endpoint para obtener todos los order_details
+    @return: lista de order_details
+"""
 #Obtiene todos los order_details
 @order_detail.get("/order_details", response_model=list[Order_detail_outs], tags=["order_details"])
 def get_order_details():
     return conn.execute(order_details.select()).fetchall()
 
+"""
+    Endpoint para obtener un order_detail a través de un ID
+    @param: id_order_detail: id del order_detail
+"""
 #Obtiene un order_detail por id
 @order_detail.get("/order_details/{id}", response_model=Order_detail_outs, tags=["order_details"])
 def get_order_detail(id: str):
     return conn.execute(order_details.select().where(order_details.c.id == id)).first()
 
-
+"""
+    Endpoint para crear un order_detail
+    @param: order_detail: información del order_detail
+    @return: un order_detail
+"""
 #Creación de un order_detail
 @order_detail.post("/order_details", response_model=Order_detail_outs, tags=["order_details"])
 def create_order_detail(order_detail: Order_detail_in):
@@ -38,13 +49,23 @@ def create_order_detail(order_detail: Order_detail_in):
     result = conn.execute(order_details.insert().values(new_order_detail))
     return conn.execute(order_details.select().where(order_details.c.id == result.lastrowid)).first()
 
-
+"""
+    Endpoint para borrar un order_detail
+    @param: id_order_detail: id del order_detail
+    return: HTTP_204_NO_CONTENT
+"""
 #Eliminación de un order_detail
 @order_detail.delete("/order_details/{id}", status_code = status.HTTP_204_NO_CONTENT, tags = ["order_details"])
 def delete_order_detail(id: str):
     conn.execute(order_details.delete().where(order_details.c.id == id))
     return Response(status_code = HTTP_204_NO_CONTENT)
 
+"""
+    Endpoint para actualizar un order_detail
+    @param: id_order_detail: id del order_detail
+    @param: order_detail: información del order_detail a actualizar
+    return: un order_detail actualizado
+"""
 #Actualización de un order_detail
 @order_detail.put("/order_details/{id}", response_model=Order_detail_outs, tags = ["order_details"])
 def update_order_detail(id: str, order_detail: Order_detail_update):
