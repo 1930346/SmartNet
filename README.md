@@ -52,7 +52,7 @@ graph TD
 - [Data Dictionary](https://drive.google.com/file/d/1oAJAEBAfMfc9hIrT_wIkq7Z9ojCXjpAE/view)
 
 # Project Views With Vue.js 3 Repository
-- [SmartNet Linked](https://github.com/CarlosAvalos173/SmartnetLinked)
+- [SmartNet Linked](https://github.com/Dinotator/yorick)
 # Requirements
 - [Python 3.10.2](https://www.python.org/ "Python latest version")
 - [FastAPI 0.75.0](https://fastapi.tiangolo.com/ "FastAPI latest version")
